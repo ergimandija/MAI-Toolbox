@@ -1,0 +1,126 @@
+<div class="h-screen flex flex-col bg-white">
+
+    <!-- Header -->
+
+    <header class="
+        px-6
+        py-4
+        bg-gradient-to-r
+        from-green-950
+        via-emerald-800
+        to-green-600
+        text-white
+        flex
+        items-center
+        justify-between
+        shadow-lg
+    ">
+
+        <h1 class="text-xl font-bold">
+            mandijaGPT
+        </h1>
+
+        <div class="w-3 h-3 rounded-full bg-green-300 animate-pulse"></div>
+
+    </header>
+
+
+    <!-- Messages -->
+
+    <main class="
+        flex-1
+        overflow-y-auto
+        px-6
+        py-8
+        space-y-6
+        bg-white
+    ">
+
+        <!-- Assistant -->
+
+        <div class="flex">
+
+            <div class="
+                max-w-[70%]
+                bg-gray-100
+                text-gray-800
+                px-5
+                py-4
+                rounded-3xl
+                rounded-bl-md
+                shadow-sm
+            ">
+
+                Hello 👋 How can I help today?
+
+            </div>
+
+        </div>
+
+
+        <!-- User -->
+
+        <div class="flex justify-end">
+
+            <div class="
+                max-w-[70%]
+                bg-green-500
+                text-white
+                px-5
+                py-4
+                rounded-3xl
+                rounded-br-md
+            ">
+
+                Tell me something interesting.
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- Input -->
+
+    <footer class="
+        p-5
+        bg-white
+        border-t
+        border-gray-200
+    ">
+
+        <div class="flex gap-3">
+
+            <input
+                type="text"
+                placeholder="Type a message..."
+                class="
+                    flex-1
+                    px-5
+                    py-4
+                    rounded-2xl
+                    border
+                    border-gray-300
+                    outline-none
+                    focus:border-green-500
+                "
+            >
+
+            <button class="
+                px-6
+                rounded-2xl
+                bg-green-500
+                text-white
+                font-semibold
+                hover:bg-green-400
+                transition
+            ">
+                Send
+            </button>
+
+        </div>
+
+    </footer>
+
+</div>
