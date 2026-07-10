@@ -21,19 +21,10 @@ export class ApiService {
             
           ],
           "stream": false
-        }).subscribe( (response) => {
-          console.log(response.message.content);
-        }
-
-        );
+        });
 
     }
 
-    recieveResponse(request: Observable<any>){
-        request.subscribe((response) => {
-          return response.message.content;
-        })
-    }
 
 
 }

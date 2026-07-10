@@ -1,7 +1,17 @@
 <div class="flex " [class.justify-end]=isUser()>
-            <div class="chat-bubble assistant-bubble"
-            [class.assistant-bubble]=!isUser()
-            [class.user-bubble]=isUser()>
-                {{message()}}
-            </div>
+              <div
+                    class="chat-bubble"
+                    [class.assistant-bubble]="!isUser()"
+                    [class.user-bubble]="isUser()"
+                >
+                    @if (loading()) {
+                    <div class="typing-indicator">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                    } @else {
+                    {{ message() }}
+                    }
+                </div>
 </div>

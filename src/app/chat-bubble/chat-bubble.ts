@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { input } from '@angular/core';
+
 @Component({
   selector: 'app-chat-bubble',
   imports: [],
@@ -10,4 +11,5 @@ export class ChatBubble {
 
   message = input<string>('');
   isUser = input<boolean>(false);
+  loading = input<boolean>(false);
 }

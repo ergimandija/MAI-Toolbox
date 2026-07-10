@@ -1,8 +1,9 @@
-import { Component, inputBinding, createComponent, viewChild } from '@angular/core';
+import { Component, inputBinding, createComponent, viewChild, input } from '@angular/core';
 import { ApiService } from '../api-service';
 import { FormsModule } from '@angular/forms';
 import { ChatBubble } from '../chat-bubble/chat-bubble';
 import { ViewContainerRef } from '@angular/core';
+import { Observable } from 'rxjs';
 @Component({
   selector: 'app-chat-window',
   imports: [FormsModule, ChatBubble],
@@ -16,18 +17,25 @@ export class ChatWindow {
     }
 
    
-
-    recieveMessage(message: string){
-    
-    }
-
     sendMessage(){
-      this.createElement(this.currentMessage,true);
+      this.createChatEntry(this.currentMessage,true);
       console.log("sending...");
-      //this.apiService.sendMessage(this.currentMessage);
+      const request = this.apiService.sendMessage(this.currentMessage);
+      this.recieveMessage(request);
     }
 
-    private createElement(message:string, isUser: boolean){
+    recieveMessage(request: Observable<any>){
+      const responseBubble = this.messageContainer().createComponent(ChatBubble);
+      responseBubble.setInput('loading',true);
+      responseBubble.setInput('isUser', false);
+      request.subscribe((response) => {
+        responseBubble.setInput('loading',false);
+        responseBubble.setInput('message',response.message.content);
+      
+      });
+    }
+
+    private createChatEntry(message:string, isUser: boolean){
       const element  = this.messageContainer().createComponent(ChatBubble);
       element.setInput('message', message);
       element.setInput('isUser', isUser);
