@@ -21,10 +21,13 @@ export class ChatWindow {
 
    
     sendMessage(){
+      if(this.currentMessage != ''){
       this.createRequestMessage(this.currentMessage,true);
       const request = this.apiService.sendMessage(this.currentMessage);
+      this.currentMessage = '';
       this.loadingResponse.set(true);
       this.recieveMessage(request);
+      }
     }
 
     recieveMessage(request: Observable<any>){

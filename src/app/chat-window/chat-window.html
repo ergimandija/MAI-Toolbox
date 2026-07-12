@@ -57,6 +57,7 @@
 
             <input
                 type="text"
+                (keyup.enter)="sendMessage()"
                 [(ngModel)]="currentMessage"
                 placeholder="Type a message..."
                 class="
@@ -86,6 +87,7 @@
             } @else {
                 <button 
                 (click)="sendMessage()"
+                
                 class="
                     px-6
                     rounded-2xl
