@@ -12,8 +12,8 @@ import { Observable, Subscription } from 'rxjs';
 export class ChatWindow {
     currentMessage = '';
     loadingResponse = signal<boolean>(false);
-    private request: Subscription | undefined = undefined;
-    private currentResponseBubble: ComponentRef<ChatBubble> | undefined = undefined;
+    private request?: Subscription;
+    private currentResponseBubble?: ComponentRef<ChatBubble>;
     private messageContainer = viewChild.required('container', { read: ViewContainerRef });
     
     constructor(private apiService: ApiService){
