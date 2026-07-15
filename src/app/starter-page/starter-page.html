@@ -1,91 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://cdn.tailwindcss.com"></script>
-
-
-<title>Green Chat Landing</title>
-</head>
-
-<body class="relative min-h-screen overflow-hidden bg-gradient-to-br from-green-950 via-emerald-800 to-green-500">
-
-<!-- Background blobs -->
-
-<div class="absolute inset-0 overflow-hidden">
-
-<div class="absolute top-10 left-10 w-96 h-96 bg-green-400 opacity-20 blur-3xl rounded-full animate-pulse"></div>
-
-<div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-emerald-300 opacity-20 blur-3xl rounded-full animate-pulse"></div>
-
+<div class="page-shell">
+  <div class="glow glow-one"></div><div class="glow glow-two"></div>
+  <app-navbar />
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="hero-copy">
+        <p class="eyebrow"><span></span>Your local AI workspace</p>
+        <h1 id="page-title">Your AI.<br /><em>All in one place.</em></h1>
+        <p class="hero-description">MAI Toolbox is Mandija's home for powerful local AI tools—private, practical, and made to fit the way you work.</p>
+        <div class="hero-actions"><a class="primary-button" href="#tools">Explore the toolbox <span>↓</span></a><a class="text-link" routerLink="/chat-window">Try Mandija GPT ↗</a></div>
+        <p class="local-note"><span class="status-dot"></span>Built for local-first AI</p>
+      </div>
+      <div class="hero-art" aria-label="Preview of MAI Toolbox" role="img">
+        <div class="orb orb-top"></div><div class="orb orb-bottom"></div>
+        <div class="preview-window"><div class="window-bar"><div class="window-dots"><i></i><i></i><i></i></div><span>mai-toolbox.local</span><b>⌘</b></div><div class="window-content"><div class="preview-sidebar"><span class="mini-logo">M</span><span class="active-mini"></span><span></span><span></span><span></span></div><div class="preview-main"><div class="preview-title"><span>Good morning, Mandija</span><small>Local workspace</small></div><div class="tool-preview-card"><div class="card-icon">✦</div><div><b>Mandija GPT</b><small>Your personal AI assistant</small></div><button>Open →</button></div><div class="preview-label">YOUR TOOLBOX</div><div class="preview-grid"><div><span>◌</span><b>Image Studio</b><small>Coming soon</small></div><div><span>⌁</span><b>Documents</b><small>Coming soon</small></div></div></div></div></div>
+        <div class="float-tag tag-private"><span>✓</span> Private by default</div><div class="float-tag tag-local"><span>⌘</span> Runs on your machine</div>
+      </div>
+    </section>
+    <section class="tools-section" id="tools" aria-labelledby="tools-title">
+      <div class="section-heading"><div><p class="eyebrow"><span></span>The toolbox</p><h2 id="tools-title">Start with what you need.</h2></div><p>More helpful, local-first tools are on their way.</p></div>
+      <div class="tool-grid">
+        <a class="tool-card featured" routerLink="/chat-window"><div class="card-top"><span class="tool-icon">✦</span><span class="available">Available now</span></div><h3>Mandija GPT</h3><p>Chat, think, and create with your own AI assistant.</p><span class="card-action">Open assistant <b>→</b></span></a>
+        <article class="tool-card muted"><div class="card-top"><span class="tool-icon">◌</span><span class="soon">Coming soon</span></div><h3>Image Studio</h3><p>Generate and refine visuals from your local workspace.</p><span class="card-action">In development</span></article>
+        <article class="tool-card muted"><div class="card-top"><span class="tool-icon">⌁</span><span class="soon">Coming soon</span></div><h3>Document Lab</h3><p>Make sense of your documents without sending them away.</p><span class="card-action">In development</span></article>
+      </div>
+    </section>
+    <section class="about-section" id="about"><p class="eyebrow"><span></span>Built by Mandija</p><h2>Powerful AI should feel<br />close to home.</h2><p>MAI Toolbox is a growing collection of tools developed by Mandija—designed around control, privacy, and a calmer way to use AI.</p></section>
+  </main>
+  <footer><a routerLink="/">MAI Toolbox</a><span>Mandija AI Toolbox</span><a routerLink="/chat-window">Mandija GPT ↗</a></footer>
 </div>
-
-
-<!-- Main Content -->
-
-<div class="relative flex flex-col items-center justify-center min-h-screen gap-10 px-4">
-
-    <!-- Animated Window Message -->
-
-    <div class="float-animation message-animation">
-
-        <div class="w-[440px] rounded-3xl overflow-hidden backdrop-blur-xl border border-white/20 bg-white/10 shadow-2xl">
-
-            <!-- Fake window bar -->
-
-            <div class="flex items-center gap-2 px-4 py-3 bg-white/10 border-b border-white/10">
-
-                <div class="w-3 h-3 rounded-full bg-red-400"></div>
-                <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
-                <div class="w-3 h-3 rounded-full bg-green-400"></div>
-
-            </div>
-
-            <div class="p-6 text-white">
-
-                <p class="text-sm opacity-70 mb-2">
-                    Assistant
-                </p>
-
-                <h2 class="text-2xl font-bold mb-3">
-                    Welcome to Mandija GPT 👋
-                </h2>
-
-                <p class="text-green-100">
-                    Ready to start chatting? Click below and jump into the conversation.
-                </p>
-
-            </div>
-
-        </div>
-
-    </div>
-
-
-    <!-- Button -->
-
-    <a
-        routerLink = "/chat-window"
-        class="
-        px-10 py-5
-        rounded-2xl
-        text-xl
-        font-bold
-        text-green-900
-        bg-white
-        shadow-2xl
-        hover:scale-105
-        hover:shadow-green-900/30
-        transition-all
-        duration-300
-        "
-
-    >
-        Open Chat
-    </a>
-
-</div>
-
-</body>
-</html>

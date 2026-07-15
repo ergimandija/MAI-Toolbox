@@ -1,0 +1,5 @@
+<header class="site-header">
+  <a class="brand" routerLink="/" (click)="closeMenu()" aria-label="MAI Toolbox home"><span class="brand-mark" aria-hidden="true">M</span><span>MAI <strong>Toolbox</strong></span></a>
+  <button class="menu-toggle" type="button" [attr.aria-expanded]="menuOpen()" aria-label="Toggle navigation menu" (click)="menuOpen.update((isOpen) => !isOpen)"><span></span><span></span><span></span></button>
+  <nav class="nav-links" [class.is-open]="menuOpen()" aria-label="Main navigation"><a href="#tools" (click)="closeMenu()">Tools</a><a href="#about" (click)="closeMenu()">About</a><a class="nav-cta" routerLink="/chat-window" (click)="closeMenu()">Open Mandija GPT ↗</a></nav>
+</header>
