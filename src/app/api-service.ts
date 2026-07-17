@@ -12,7 +12,7 @@ export class ApiService {
 
     sendMessage(message:string){
         return this.httpClient.post<any>(this.apiUrl, {
-          "model": "liskov-TEST:latest",
+          "model": "Liskov:latest",
           "messages": [
             {
               "role": "user",
@@ -20,7 +20,10 @@ export class ApiService {
             }
             
           ],
-          "stream": false
+          "stream": false,
+          "options": {
+            "temperature": 0.7
+          }
         });
 
     }

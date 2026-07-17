@@ -13,9 +13,16 @@ export class ChatBubble {
   isUser = input<boolean>(false);
   loading = input<boolean>(false);
   parse(message: string){
+    if(message.includes('```')){
+      message = message.replace('```', '<div>');
+      message = message.replace('```', '</div>');
+    }
+    if(message.startsWith('\"') && message.endsWith('\"')){
+      message = message.slice(1, -1);
+    }
     return message.replaceAll('\\n', '<br>')
                   .trim()
                   .replaceAll('\\', '')
-                  .replaceAll('```', '');
+                  .replaceAll('\"', '');
   }
 }
