@@ -3,6 +3,10 @@
 A UI built with Angular to interact with a local Model running on an Ollama Runtime.
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.2.9.
 
+## License
+
+This project is licensed under the GNU GPL v3. See the LICENSE file for details.
+
 ## Development server
 
 To start a local development server, run:
