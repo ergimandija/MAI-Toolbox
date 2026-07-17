@@ -4,7 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { ChatBubble } from '../chat-bubble/chat-bubble';
 import { Observable, Subscription } from 'rxjs';
 import { ChatHeader } from '../chat-header/chat-header';
-
+import { ChatQueue } from '../../structures/chatqueue';
+export interface Message {
+        role: 'user' | 'assistant';
+        content: string;
+}
 @Component({
   selector: 'app-chat-window',
   imports: [FormsModule, ChatBubble, ChatHeader],
@@ -12,6 +16,7 @@ import { ChatHeader } from '../chat-header/chat-header';
   styleUrl: './chat-window.css',
 })
 export class ChatWindow {
+  private messageQueue = new ChatQueue<Message>();
   readonly modelTemperature = signal<number>(0.8);
   currentMessage = '';
   loadingResponse = signal<boolean>(false);
@@ -26,7 +31,8 @@ export class ChatWindow {
   sendMessage() {
     if (this.currentMessage != '') {
       this.createRequestMessage(this.currentMessage, true);
-      const request = this.apiService.sendMessage(this.currentMessage, this.modelTemperature());
+      this.messageQueue.enqueue({ role: 'user', content: this.currentMessage });
+      const request = this.apiService.sendMessage(this.messageQueue.getItems(), this.modelTemperature());
       this.currentMessage = '';
       this.loadingResponse.set(true);
       this.recieveMessage(request);
@@ -40,6 +46,7 @@ export class ChatWindow {
       this.loadingResponse.set(false);
       this.currentResponseBubble?.setInput('loading', this.loadingResponse());
       this.currentResponseBubble?.setInput('message', response.message.content);
+      this.messageQueue.enqueue({ role: 'assistant', content: response.message.content });
 
     });
   }
