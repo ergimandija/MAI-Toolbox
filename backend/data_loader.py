@@ -1,12 +1,12 @@
 from llama_index.readers.file import PDFReader
 from llama_index.core.node_parser import SentenceSplitter
-
+from sentence_transformers import SentenceTransformer
 
 model = SentenceTransformer("BAAI/bge-large-en-v1.5")
 
 
 
-splitter = SentenceSplitter(chunk_size=500, chunk_overlap=50)
+splitter = SentenceSplitter(chunk_size=250, chunk_overlap=20)
 
 
 def load_and_chunk_pdf(file_path: str):

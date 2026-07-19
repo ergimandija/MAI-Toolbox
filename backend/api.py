@@ -1,8 +1,9 @@
-from fastapi import FastAPI  
+from fastapi import FastAPI, Request  
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
+import requests
 
 
 app = FastAPI()
@@ -23,9 +24,32 @@ apiUrl = "http://localhost:11434/api/chat"
 
 @app.post("/api/chat")
 @limiter.limit("5/minute") 
-async def chat_endpoint(request: dict):
-   
-    import requests
+async def chat_endpoint(request: Request, body: dict):    
+    print(f"Retrieving context for user question")
+    user_question = body["messages"][-1]["content"]
+    from vector import retrieve_from_knowledge_base
 
-    response = requests.post(apiUrl, json=request)
+    docs = retrieve_from_knowledge_base(user_question)
+    context = "\n\n".join(docs)
+    print(f"Retrieved context from knowledge base:\n{context}\n")
+    system_message = {
+        "role": "system",
+        "content": f"""
+    Use the provided context to answer the question. If the answer cannot be found in the context, generate from you knowledge.
+
+    Context:
+    {context}
+    """
+    }
+
+    messages = [system_message] + body["messages"]
+
+    payload = {
+        "model": body["model"],
+        "messages": messages,
+        "stream": body.get("stream", False)
+    }
+
+    response = requests.post(apiUrl, json=payload)
     return response.json()
+
