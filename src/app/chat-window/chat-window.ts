@@ -18,6 +18,7 @@ export interface Message {
 export class ChatWindow {
   private messageQueue = new ChatQueue<Message>();
   readonly modelTemperature = signal<number>(0.8);
+  readonly useKnowledgeBase = signal<boolean>(false);
   currentMessage = '';
   loadingResponse = signal<boolean>(false);
   private request?: Subscription;
@@ -32,7 +33,7 @@ export class ChatWindow {
     if (this.currentMessage != '') {
       this.createRequestMessage(this.currentMessage, true);
       this.messageQueue.enqueue({ role: 'user', content: this.currentMessage });
-      const request = this.apiService.sendMessage(this.messageQueue.getItems(), this.modelTemperature());
+      const request = this.apiService.sendMessage(this.messageQueue.getItems(), this.modelTemperature(), this.useKnowledgeBase());
       this.currentMessage = '';
       this.loadingResponse.set(true);
       this.recieveMessage(request);

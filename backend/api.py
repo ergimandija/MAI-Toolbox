@@ -22,8 +22,8 @@ app.add_middleware(
 apiUrl = "http://localhost:11434/api/chat"
 
 
-@app.post("/api/chat")
-@limiter.limit("5/minute") 
+@app.post("/api/chat_rag")
+@limiter.limit("3/minute") 
 async def chat_endpoint(request: Request, body: dict):    
     print(f"Retrieving context for user question")
     user_question = body["messages"][-1]["content"]
@@ -44,6 +44,7 @@ async def chat_endpoint(request: Request, body: dict):
 
     messages = [system_message] + body["messages"]
 
+
     payload = {
         "model": body["model"],
         "messages": messages,
@@ -53,3 +54,9 @@ async def chat_endpoint(request: Request, body: dict):
     response = requests.post(apiUrl, json=payload)
     return response.json()
 
+@app.post("/api/chat")
+@limiter.limit("5/minute") 
+async def chat_endpoint(request: Request, body: dict):    
+    print(body)
+    response = requests.post(apiUrl, json=body)
+    return response.json()

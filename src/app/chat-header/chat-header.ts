@@ -16,9 +16,14 @@ export class ChatHeader {
   readonly sliderValue = signal<number>(0.8);
   readonly sliderValueChange = output<number>();
   readonly menuOpen = signal(false);
+  readonly useKnowledgeBase = signal(false);
+  readonly useKnowledgeBaseChange = output<boolean>();
   constructor() {
     effect(() => {
       this.sliderValueChange.emit(this.sliderValue());
+    })
+    effect(() => {
+      this.useKnowledgeBaseChange.emit(this.useKnowledgeBase());
     })
   }
 

@@ -11,8 +11,8 @@ export class ApiService {
     private httpClient:HttpClient = inject(HttpClient);
     constructor(){} 
 
-    sendMessage( messages: Message[] = [], temperature:number = 0.8): Observable<any> {
-        return this.httpClient.post<any>(this.apiUrl, {
+    sendMessage( messages: Message[] = [], temperature:number = 0.8, useKnowledgeBase:boolean = false ): Observable<any> {
+        return this.httpClient.post<any>((useKnowledgeBase) ? this.apiUrl+"_rag" : this.apiUrl, {
           "model": "Liskov:latest",
           "messages": messages,
           "stream": false,
