@@ -1,5 +1,9 @@
 <div class="h-screen flex flex-col bg-white">
 
+    @if (errorMessage(); as message) {
+        <app-error-modal [errorMessage]="message" (closed)="closeErrorModal()" />
+    }
+
     <app-chat-header (useKnowledgeBaseChange)="useKnowledgeBase.set($event)" (sliderValueChange)="modelTemperature.set($event)"></app-chat-header>
 
 

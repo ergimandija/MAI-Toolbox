@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ChatBubble } from '../chat-bubble/chat-bubble';
 import { Observable, Subscription } from 'rxjs';
 import { ChatHeader } from '../chat-header/chat-header';
+import { ErrorModal } from '../error-modal/error-modal';
 import { ChatQueue } from '../../structures/chatqueue';
 export interface Message {
         role: 'user' | 'assistant';
@@ -11,7 +12,7 @@ export interface Message {
 }
 @Component({
   selector: 'app-chat-window',
-  imports: [FormsModule, ChatBubble, ChatHeader],
+  imports: [FormsModule, ChatBubble, ChatHeader, ErrorModal],
   templateUrl: './chat-window.html',
   styleUrl: './chat-window.css',
 })
@@ -21,6 +22,7 @@ export class ChatWindow {
   readonly useKnowledgeBase = signal<boolean>(false);
   currentMessage = '';
   loadingResponse = signal<boolean>(false);
+  errorMessage = signal<string | null>(null);
   private request?: Subscription;
   private currentResponseBubble?: ComponentRef<ChatBubble>;
   private messageContainer = viewChild.required('container', { read: ViewContainerRef });
@@ -43,12 +45,21 @@ export class ChatWindow {
   recieveMessage(request: Observable<any>) {
     this.currentResponseBubble = this.createResponseBubble();
 
-    this.request = request.subscribe((response) => {
+    this.request = request.subscribe({
+      next: (response) => {
       this.loadingResponse.set(false);
       this.currentResponseBubble?.setInput('loading', this.loadingResponse());
       this.currentResponseBubble?.setInput('message', response.message.content);
       this.messageQueue.enqueue({ role: 'assistant', content: response.message.content });
+      },
 
+      error: (error) => {
+        this.cancelGeneration();
+        console.error('Error receiving message:', error);
+        this.errorMessage.set(
+           error?.message || error?.statusText || 'Unable to get a response. Please try again.'
+        );
+      }
     });
   }
 
@@ -56,6 +67,10 @@ export class ChatWindow {
     this.request?.unsubscribe();
     this.currentResponseBubble?.destroy();
     this.loadingResponse.set(false);
+  }
+
+  closeErrorModal() {
+    this.errorMessage.set(null);
   }
 
   createRequestMessage(message: string, isUser: boolean) {
