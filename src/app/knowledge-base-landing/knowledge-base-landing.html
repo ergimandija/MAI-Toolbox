@@ -1,0 +1,37 @@
+<main class="relative isolate min-h-screen overflow-hidden bg-[#f6faf5] text-emerald-950">
+  <div class="pointer-events-none absolute inset-0 overflow-hidden" aria-hidden="true">
+    <div class="kb-orb kb-orb-one"></div>
+    <div class="kb-orb kb-orb-two"></div>
+    <div class="kb-orb kb-orb-three"></div>
+  </div>
+
+  <section class="relative mx-auto flex min-h-screen max-w-6xl flex-col justify-center px-6 py-14 sm:px-10">
+    <a routerLink="/" class="mb-12 inline-flex w-fit items-center gap-2 text-sm font-semibold text-emerald-800 transition hover:text-emerald-950 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">
+      <span aria-hidden="true">←</span> Back to toolbox
+    </a>
+    <div class="grid items-center gap-14 lg:grid-cols-[1fr_0.88fr]">
+      <div class="max-w-2xl">
+        <p class="mb-5 inline-flex items-center gap-2 rounded-full bg-emerald-900/8 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.13em] text-emerald-800"><span class="size-2 rounded-full bg-lime-500"></span> Local context, ready when you are</p>
+        <h1 class="max-w-xl text-5xl font-black leading-[0.95] tracking-[-0.045em] sm:text-7xl">Give your AI a place to <span class="text-emerald-700">remember.</span></h1>
+        <p class="mt-7 max-w-xl text-lg leading-8 text-emerald-950/70">Build a private library from the documents that matter. Add files once, then let MAI Chat draw on your own source material.</p>
+        <a routerLink="/knowledge-base" class="mt-9 inline-flex items-center gap-3 rounded-xl bg-emerald-950 px-6 py-4 text-base font-bold text-[#effbe8] shadow-[0_14px_30px_rgba(6,78,59,0.24)] transition hover:-translate-y-1 hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-700">Build your base <span class="text-xl" aria-hidden="true">→</span></a>
+        <p class="mt-5 text-sm text-emerald-900/60">Your files stay on your machine.</p>
+      </div>
+
+      <div class="relative mx-auto w-full max-w-md">
+        <div class="absolute -inset-5 -z-10 rounded-[2rem] bg-lime-300/40 blur-3xl"></div>
+        <div class="overflow-hidden rounded-2xl bg-emerald-950 p-3 shadow-[0_28px_60px_rgba(6,78,59,0.28)]">
+          <div class="flex items-center gap-1.5 border-b border-white/10 px-2 pb-3"><i class="size-2 rounded-full bg-rose-400"></i><i class="size-2 rounded-full bg-amber-300"></i><i class="size-2 rounded-full bg-lime-400"></i><span class="ml-2 text-xs font-medium text-white/45">your-local-library</span></div>
+          <div class="p-5">
+            <div class="mb-6 flex items-center justify-between"><div><p class="text-xs font-semibold uppercase tracking-[0.16em] text-lime-300">Knowledge Base</p><p class="mt-1 text-xl font-bold text-white">Project notes</p></div><span class="grid size-10 place-items-center rounded-xl bg-lime-300 text-xl text-emerald-950">✦</span></div>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3 rounded-xl bg-white/10 px-4 py-3 text-sm text-white"><span class="grid size-8 place-items-center rounded-lg bg-lime-300/20 text-lime-300">⌁</span><span class="flex-1">Research brief.pdf</span><span class="text-xs text-white/50">ready</span></div>
+              <div class="flex items-center gap-3 rounded-xl bg-white/8 px-4 py-3 text-sm text-white/80"><span class="grid size-8 place-items-center rounded-lg bg-white/10 text-lime-200">≡</span><span class="flex-1">Team notes.md</span><span class="text-xs text-white/45">ready</span></div>
+              <div class="flex items-center gap-3 rounded-xl border border-dashed border-lime-300/40 px-4 py-3 text-sm text-lime-100"><span class="text-lg">+</span> Add another source</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

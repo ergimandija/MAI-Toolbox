@@ -40,6 +40,7 @@
             <textarea 
                 #messageInput
                 type="text"
+                [disabled]="loadingResponse()"
                 (keyup.enter)="sendMessage()"
                 [(ngModel)]="currentMessage"
                 (input)="autoResize(messageInput)"

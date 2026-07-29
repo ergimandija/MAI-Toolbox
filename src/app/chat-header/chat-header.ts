@@ -11,7 +11,7 @@ import { signal, output, effect } from '@angular/core';
   styleUrl: './chat-header.css',
 })
 export class ChatHeader {
-  readonly models = [{'name': 'Liskov', 'desc': 'OOP Expert'}, {'name': 'Turing', 'desc': 'Procedural Programmer / Algorithmist'}, {'name': 'DaVinci', 'desc': 'Creative Thinker'}, {'name': 'Cicero', 'desc': 'Philosopher'}, {'name': 'Shakescene', 'desc': 'Drama Writer'}, {'name': 'Cortana', 'desc': 'Virtual Assistant'}];
+  readonly models = [{'name': 'Liskov', 'desc': 'OOP Expert'}, {'name': 'Turing', 'desc': 'Procedural Programmer / Algorithmist'}, {'name': 'DaVinci', 'desc': 'Creative Thinker'}, {'name': 'Shakescene', 'desc': 'Drama Writer'}, {'name': 'Maia', 'desc': 'Virtual Assistant'}];
   readonly selectedModel = signal<string>(this.models[0].name);
   readonly sliderValue = signal<number>(0.8);
   readonly sliderValueChange = output<number>();

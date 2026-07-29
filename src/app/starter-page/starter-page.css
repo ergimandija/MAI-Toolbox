@@ -434,9 +434,10 @@ h2 {
 }
 
 .tool-card.featured {
-    background: linear-gradient(140deg, #0c7452, #0a4f3a);
+    background: #fbfffc;
     border-color: #0d7654;
-    color: #fff
+    color: #174c3a;
+    border-width: 2px;
 }
 
 .tool-card.featured:hover {
@@ -501,9 +502,7 @@ h2 {
     margin: 0
 }
 
-.featured p {
-    color: #c5ebd6
-}
+
 
 .card-action {
     display: block;

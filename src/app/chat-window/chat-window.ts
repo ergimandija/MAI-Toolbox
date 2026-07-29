@@ -33,11 +33,11 @@ export class ChatWindow {
 
   sendMessage() {
     if (this.currentMessage != '') {
+      this.loadingResponse.set(true);
       this.createRequestMessage(this.currentMessage, true);
       this.messageQueue.enqueue({ role: 'user', content: this.currentMessage });
       const request = this.apiService.sendMessage(this.messageQueue.getItems(), this.modelTemperature(), this.useKnowledgeBase());
       this.currentMessage = '';
-      this.loadingResponse.set(true);
       this.recieveMessage(request);
     }
   }
@@ -55,7 +55,6 @@ export class ChatWindow {
 
       error: (error) => {
         this.cancelGeneration();
-        console.error('Error receiving message:', error);
         this.errorMessage.set(
            error?.message || error?.statusText || 'Unable to get a response. Please try again.'
         );
