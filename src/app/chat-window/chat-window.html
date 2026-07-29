@@ -4,7 +4,7 @@
         <app-error-modal [errorMessage]="message" (closed)="closeErrorModal()" />
     }
 
-    <app-chat-header (useKnowledgeBaseChange)="useKnowledgeBase.set($event)" (sliderValueChange)="modelTemperature.set($event)"></app-chat-header>
+    <app-chat-header (selectedModelChange)="selectedModel.set($event)" (useKnowledgeBaseChange)="useKnowledgeBase.set($event)" (sliderValueChange)="modelTemperature.set($event)"></app-chat-header>
 
 
     <!-- Messages -->

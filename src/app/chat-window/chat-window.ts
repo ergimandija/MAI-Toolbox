@@ -21,6 +21,7 @@ export class ChatWindow {
   readonly modelTemperature = signal<number>(0.8);
   readonly useKnowledgeBase = signal<boolean>(false);
   currentMessage = '';
+  selectedModel = signal<string>('');
   loadingResponse = signal<boolean>(false);
   errorMessage = signal<string | null>(null);
   private request?: Subscription;
@@ -36,7 +37,7 @@ export class ChatWindow {
       this.loadingResponse.set(true);
       this.createRequestMessage(this.currentMessage, true);
       this.messageQueue.enqueue({ role: 'user', content: this.currentMessage });
-      const request = this.apiService.sendMessage(this.messageQueue.getItems(), this.modelTemperature(), this.useKnowledgeBase());
+      const request = this.apiService.sendMessage(this.messageQueue.getItems(), this.modelTemperature(), this.useKnowledgeBase(), this.selectedModel());
       this.currentMessage = '';
       this.recieveMessage(request);
     }

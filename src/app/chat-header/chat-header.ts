@@ -18,12 +18,16 @@ export class ChatHeader {
   readonly menuOpen = signal(false);
   readonly useKnowledgeBase = signal(false);
   readonly useKnowledgeBaseChange = output<boolean>();
+  readonly selectedModelChange = output<string>();
   constructor() {
     effect(() => {
       this.sliderValueChange.emit(this.sliderValue());
     })
     effect(() => {
       this.useKnowledgeBaseChange.emit(this.useKnowledgeBase());
+    })
+    effect(() => {
+      this.selectedModelChange.emit(this.selectedModel());
     })
   }
 
