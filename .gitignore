@@ -8,6 +8,8 @@
 
 # Agents
 .agents/
+.codex/
+.impeccable/
 
 # Node
 /node_modules
