@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
 import { RangeSlider } from '../range-slider/range-slider';
 import { signal, output, effect } from '@angular/core';
-
+import { RouterLink } from '@angular/router';
 
 
 @Component({
   selector: 'app-chat-header',
-  imports: [RangeSlider],
+  imports: [RangeSlider, RouterLink],
   templateUrl: './chat-header.html',
   styleUrl: './chat-header.css',
 })

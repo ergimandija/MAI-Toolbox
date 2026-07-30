@@ -384,6 +384,8 @@ h2 {
 
 .tools-section {
     background: #f6fff9;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     color: #093b2b;
     padding: 5.5rem 2rem
 }
@@ -522,6 +524,8 @@ h2 {
 
 .about-section {
     background: #e1f6e9;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
     color: #0a4632;
     max-width: none;
     padding: 5.5rem max(2rem, calc((100% - 1136px)/2))

@@ -1,0 +1,13 @@
+.brand-mark {
+    align-items: center;
+    background: linear-gradient(145deg, #baffcf, #38d996);
+    border-radius: .65rem;
+    box-shadow: 0 0 24px #5eea9d66;
+    color: #073a29;
+    display: inline-flex;
+    font-size: .92rem;
+    font-weight: 900;
+    height: 2rem;
+    justify-content: center;
+    width: 2rem
+}

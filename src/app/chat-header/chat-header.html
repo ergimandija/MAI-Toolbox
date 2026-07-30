@@ -12,9 +12,12 @@
         shadow-lg
     ">
 
-    <h1 class="text-xl font-bold">
-        MAI Chat
-    </h1>
+    
+    <a routerLink="/" class="group flex items-center gap-3 text-emerald-950" aria-label="MAI Toolbox home">
+        <span class="brand-mark" aria-hidden="true">M</span>
+        <span class="leading-tight"><span class="block text-[0.65rem] font-bold uppercase tracking-[0.18em] text-emerald-300">MAI Toolbox</span><span class="block text-sm text-white font-semibold">MAI Chat</span></span>
+    </a>
+    
     <div class="flex items-center gap-2">
         <h1 class="text-lg font-semibold" (click)="this.menuOpen.set(!this.menuOpen())">
             {{ this.selectedModel() }}

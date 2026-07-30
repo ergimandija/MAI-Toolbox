@@ -4,14 +4,14 @@
     <div class="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true"><div class="kb-orb kb-orb-one"></div><div class="kb-orb kb-orb-two"></div></div>
     <div class="mx-auto max-w-5xl">
       <div class="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div><p class="text-sm font-bold uppercase tracking-[0.14em] text-emerald-700">Your local library</p><h1 class="mt-2 text-4xl font-black tracking-[-0.04em] sm:text-5xl">Knowledge Base</h1><p class="mt-3 max-w-xl text-base leading-7 text-emerald-950/65">Add source files for MAI Chat to reference in your conversations.</p></div>
+        <div><p class="text-sm font-bold uppercase tracking-[0.14em] text-emerald-700">Your local library</p><h1 class="mt-2 text-4xl font-bold tracking-[-0.04em] sm:text-5xl">Knowledge Base</h1><p class="mt-3 max-w-xl text-base leading-7 text-emerald-950/65">Add source files for MAI Chat to reference in your conversations.</p></div>
         <span class="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-950 px-3 py-1.5 text-sm font-semibold text-[#effbe8]"><span class="size-2 rounded-full bg-lime-400"></span> Local only</span>
       </div>
 
-      <section class="overflow-hidden rounded-2xl bg-emerald-950 p-1 shadow-[0_24px_50px_rgba(6,78,59,0.2)]" aria-labelledby="upload-title">
+      <section class="overflow-hidden rounded-2xl shadow-[0_24px_50px_rgba(6,78,59,0.2)]" aria-labelledby="upload-title">
         <div class="rounded-[0.85rem] bg-[#e8f5e1] p-6 sm:p-9">
           <div class="flex flex-col gap-8 sm:flex-row sm:items-center sm:justify-between">
-            <div><h2 id="upload-title" class="text-2xl font-black tracking-[-0.03em]">Add to your base</h2><p class="mt-2 max-w-md leading-7 text-emerald-950/65">Choose documents, notes, or text files to make available as context.</p></div>
+            <div><h2 id="upload-title" class="text-2xl font-bold tracking-[-0.03em]">Add to your base</h2><p class="mt-2 max-w-md leading-7 text-emerald-950/65">Choose documents, notes, or text files to make available as context.</p></div>
             <label class="inline-flex cursor-pointer items-center justify-center gap-3 rounded-xl bg-emerald-950 px-5 py-3.5 font-bold text-[#effbe8] shadow-[0_9px_18px_rgba(6,78,59,0.22)] transition hover:-translate-y-0.5 hover:bg-emerald-800 focus-within:outline-2 focus-within:outline-offset-4 focus-within:outline-emerald-700"><span class="text-xl" aria-hidden="true">↑</span> Upload file<input class="sr-only" type="file" multiple accept=".pdf,.txt,.md,.doc,.docx" (change)="addFiles($event)" /></label>
           </div>
         </div>
