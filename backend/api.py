@@ -1,11 +1,13 @@
-from fastapi import FastAPI, Request, Response  
+from fastapi import FastAPI, Request, Response, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
 from vector import retrieve_from_knowledge_base, add_pdf_to_knowledge_base
+import os
+import tempfile
 import requests
-
+import traceback
 
 app = FastAPI()
 limiter = Limiter(key_func=get_remote_address)
@@ -25,7 +27,7 @@ apiUrl = "http://localhost:11434/api/chat"
 
 @app.post("/api/chat_rag")
 @limiter.limit("3/minute") 
-async def chat_endpoint(request: Request, body: dict):    
+async def chat_rag_endpoint(request: Request, body: dict):    
     print(f"Retrieving context for user question")
     user_question = body["messages"][-1]["content"]
     
@@ -64,10 +66,16 @@ async def chat_endpoint(request: Request, body: dict):
 
 @app.post("/api/fileupload")
 @limiter.limit("5/minute") 
-async def fileupload_endpoint(request: Request, body: dict):    
-    print(f"Received file upload request: {body}")
-    success = add_pdf_to_knowledge_base(body["file_path"])
+async def fileupload_endpoint(request: Request, file: UploadFile):    
+    if file.filename == "":
+        raise HTTPException(status_code=400, detail="No file selected")
+    print(f"Received file upload request: {file.filename}")
+    temp_file = tempfile.NamedTemporaryFile(delete=False)
+    temp_file.write(await file.read())
+    temp_file.close()
+    success = add_pdf_to_knowledge_base(temp_file.name)
     if not success:
+        traceback.print_exc()
         return Response("failed to upload file to the knowledge base", 500)
     return Response("File uploaded successfully")         
     

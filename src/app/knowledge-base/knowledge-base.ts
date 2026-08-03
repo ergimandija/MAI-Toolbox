@@ -1,6 +1,7 @@
 import { Component, signal } from '@angular/core';
 import { DecimalPipe } from '@angular/common';
 import { BaseHeader } from '../base-header/base-header';
+import { ApiService } from '../api-service';
 
 @Component({
   selector: 'app-knowledge-base',
@@ -12,14 +13,24 @@ export class KnowledgeBase {
   readonly selectedFiles = signal<File[]>([]);
   readonly notice = signal('Your base is empty — add the first source when you are ready.');
 
-  addFiles(event: Event): void {
+  constructor(private apiService: ApiService) {
+
+  }
+  addFile(event: Event): void {
     const input = event.target as HTMLInputElement;
     const files = Array.from(input.files ?? []);
     if (!files.length) return;
-    this.selectedFiles.update((current) => [...current, ...files]);
-    this.notice.set(`${files.length} file${files.length === 1 ? '' : 's'} added. Ready to index locally.`);
-    input.value = '';
+    this.apiService.sendFile(files[0]).subscribe({
+      next: (response) => {
+        console.log('File uploaded successfully:', response);
+      },
+      error: (error) => {
+        console.log('File upload failed:', error);
+      }
+
+    });
   }
+
 
   clearBase(): void {
     this.selectedFiles.set([]);

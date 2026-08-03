@@ -25,6 +25,15 @@ export class ApiService {
 
     }
 
+    sendFile(file: File): Observable<any> {
+      
+        const formData = new FormData();
+        formData.append('file', file, file.name);
+        const endpoint:string = this.apiUrl+"api/fileupload";
+        return this.httpClient.post<any>(endpoint, formData);
+      
+    }
+
     
 
     
