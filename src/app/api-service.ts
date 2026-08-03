@@ -7,12 +7,13 @@ import { Message } from './chat-window/chat-window';
 })
 export class ApiService {
     
-    private apiUrl:string =  "http://localhost:8000/api/chat";
+    private apiUrl:string =  "http://localhost:8000/";
     private httpClient:HttpClient = inject(HttpClient);
     constructor(){} 
 
     sendMessage( messages: Message[] = [], temperature:number = 0.8, useKnowledgeBase:boolean = false, model:string ): Observable<any> {
-        return this.httpClient.post<any>((useKnowledgeBase) ? this.apiUrl+"_rag" : this.apiUrl, {
+        const endpoint:string = (useKnowledgeBase) ? this.apiUrl+"api/chat_rag" : this.apiUrl+ "api/chat" ;
+        return this.httpClient.post<any>(endpoint, {
           "model": model+":latest",
           "messages": messages,
           "stream": false,

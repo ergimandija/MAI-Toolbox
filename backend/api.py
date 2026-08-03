@@ -1,8 +1,9 @@
-from fastapi import FastAPI, Request  
+from fastapi import FastAPI, Request, Response  
 from fastapi.middleware.cors import CORSMiddleware
 from slowapi.errors import RateLimitExceeded
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
+from vector import retrieve_from_knowledge_base, add_pdf_to_knowledge_base
 import requests
 
 
@@ -27,7 +28,7 @@ apiUrl = "http://localhost:11434/api/chat"
 async def chat_endpoint(request: Request, body: dict):    
     print(f"Retrieving context for user question")
     user_question = body["messages"][-1]["content"]
-    from vector import retrieve_from_knowledge_base
+    
 
     docs = retrieve_from_knowledge_base(user_question)
     context = "\n\n".join(docs)
@@ -60,3 +61,13 @@ async def chat_endpoint(request: Request, body: dict):
     print(body)
     response = requests.post(apiUrl, json=body)
     return response.json()
+
+@app.post("/api/fileupload")
+@limiter.limit("5/minute") 
+async def fileupload_endpoint(request: Request, body: dict):    
+    print(f"Received file upload request: {body}")
+    success = add_pdf_to_knowledge_base(body["file_path"])
+    if not success:
+        return Response("failed to upload file to the knowledge base", 500)
+    return Response("File uploaded successfully")         
+    
