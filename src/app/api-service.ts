@@ -34,6 +34,11 @@ export class ApiService {
       
     }
 
+    deleteKnowledgeBase(): Observable<any> {
+        const endpoint:string = this.apiUrl+"api/delete_knowledge_base";
+        return this.httpClient.delete<any>(endpoint);
+    }
+
     
 
     

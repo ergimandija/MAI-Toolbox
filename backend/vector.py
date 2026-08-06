@@ -33,3 +33,12 @@ def retrieve_from_knowledge_base(query: str, n_results: int = 5):
     )
     documents = results["documents"][0] 
     return documents
+
+def delete_knowledge_base():
+    try:
+        all_ids = collection.get()["ids"]
+        collection.delete(all_ids)
+        return True
+    except Exception as e:
+        print(f"Error deleting knowledge base: {e}")
+        return False    

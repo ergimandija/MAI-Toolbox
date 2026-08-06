@@ -4,7 +4,7 @@ from fastapi.responses import JSONResponse
 from slowapi.errors import RateLimitExceeded
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
-from vector import retrieve_from_knowledge_base, add_pdf_to_knowledge_base
+from vector import retrieve_from_knowledge_base, add_pdf_to_knowledge_base, delete_knowledge_base
 import os
 import tempfile
 import requests
@@ -81,4 +81,14 @@ async def fileupload_endpoint(request: Request, file: UploadFile):
             status_code=500
         )
     return JSONResponse(content={"message": "File uploaded successfully"})
-    
+
+@app.delete("/api/delete_knowledge_base")
+@limiter.limit("5/minute") 
+async def delete_knowledge_base_endpoint(request: Request):  
+    success = delete_knowledge_base()
+    if not success:
+        return JSONResponse(
+            content={"message": "failed to delete knowledge base"},
+            status_code=500
+        )
+    return JSONResponse(content={"message": "Knowledge base deleted successfully"})

@@ -48,7 +48,14 @@ export class KnowledgeBase {
   }
 
   clearBase(): void {
-    this.selectedFiles.set([]);
-    this.notice.set('Your base is empty — add the first source when you are ready.');
+    this.apiService.deleteKnowledgeBase().subscribe({
+      next: (response) => {
+        alert('Knowledge base cleared successfully.');
+        this.selectedFiles.set([]);
+      },
+      error: (error) => {
+        alert('Failed to clear knowledge base. Please try again.');
+      }
+    });
   }
 }
