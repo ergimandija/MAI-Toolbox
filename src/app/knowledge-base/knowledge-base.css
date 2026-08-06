@@ -49,3 +49,103 @@
         animation: none;
     }
 }
+
+/* Spinner */
+.kb-spinner {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999px;
+  border: 3px solid rgba(6, 78, 59, 0.12);
+  border-top-color: rgb(4, 120, 87); /* emerald-700 */
+  animation: kb-spin 0.75s linear infinite;
+}
+
+@keyframes kb-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Skeleton shimmer */
+.kb-skeleton {
+  display: block;
+  background: linear-gradient(
+    90deg,
+    rgba(6, 78, 59, 0.08) 25%,
+    rgba(6, 78, 59, 0.15) 37%,
+    rgba(6, 78, 59, 0.08) 63%
+  );
+  background-size: 400% 100%;
+  animation: kb-shimmer 1.4s ease-in-out infinite;
+}
+
+@keyframes kb-shimmer {
+  0% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Respect reduced-motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .kb-spinner,
+  .kb-skeleton {
+    animation-duration: 2.5s;
+  }
+}
+
+/* Success checkmark */
+.kb-success-icon {
+  display: grid;
+  place-items: center;
+  width: 3rem;
+  height: 3rem;
+}
+
+.kb-check {
+  width: 3rem;
+  height: 3rem;
+}
+
+.kb-check-circle {
+  stroke: rgb(4, 120, 87); /* emerald-700 */
+  stroke-width: 2.5;
+  stroke-dasharray: 151;
+  stroke-dashoffset: 151;
+  animation: kb-circle-draw 0.5s ease-out forwards;
+}
+
+.kb-check-mark {
+  stroke: rgb(4, 120, 87); /* emerald-700 */
+  stroke-width: 4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: kb-check-draw 0.3s 0.45s ease-out forwards;
+}
+
+@keyframes kb-circle-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes kb-check-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+/* Optional: gentle pop-in for the whole card */
+.kb-loading-card {
+  animation: kb-fade-in 0.3s ease-out;
+}
+
+@keyframes kb-fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .kb-check-circle,
+  .kb-check-mark,
+  .kb-loading-card {
+    animation: none;
+    stroke-dashoffset: 0;
+    opacity: 1;
+    transform: none;
+  }
+}

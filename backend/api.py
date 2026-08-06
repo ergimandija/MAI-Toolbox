@@ -1,5 +1,6 @@
 from fastapi import FastAPI, Request, Response, UploadFile, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
 from slowapi.errors import RateLimitExceeded
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.util import get_remote_address
@@ -75,7 +76,9 @@ async def fileupload_endpoint(request: Request, file: UploadFile):
     temp_file.close()
     success = add_pdf_to_knowledge_base(temp_file.name)
     if not success:
-        traceback.print_exc()
-        return Response("failed to upload file to the knowledge base", 500)
-    return Response("File uploaded successfully")         
+        return JSONResponse(
+            content={"message": "failed to upload file to the knowledge base"},
+            status_code=500
+        )
+    return JSONResponse(content={"message": "File uploaded successfully"})
     
